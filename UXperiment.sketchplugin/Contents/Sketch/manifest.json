@@ -1,0 +1,32 @@
+{
+  "author" : "",
+  "commands" : [
+    {
+      "script" : "script.cocoascript",
+      "handler" : "Make",
+      "shortcut" : "",
+      "name" : "Создать активный элемент…",
+      "identifier" : "make"
+    },
+    {
+      "script" : "script.cocoascript",
+      "handler" : "Publish",
+      "shortcut" : "",
+      "name" : "Опубликовать прототип…",
+      "identifier" : "publish"
+    }
+
+  ],
+  "menu" : {
+    "items" : [
+      "make",
+      "publish"
+    ],
+    "title" : "UXperiment"
+  },
+  "identifier" : "com.example.sketch.fca9e85c-c84b-4de8-8dd3-aa9af1afe307",
+  "version" : "0.0.1",
+  "description" : "",
+  "authorEmail" : "",
+  "name" : "UXperiment"
+}

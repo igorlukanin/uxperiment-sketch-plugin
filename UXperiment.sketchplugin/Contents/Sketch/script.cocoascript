@@ -1,0 +1,33 @@
+@import 'util.js'
+
+function testSelection(selection) {
+	var result = false;
+	if ([selection count] == 0) {
+		alert('Выбери хоть что-нибудь!', 'UXperiment');
+		result = false;
+	} else {
+		result = true;
+	}
+	return result;
+}
+
+
+var Make = function(context) {
+	var	doc = context.document;
+	var selection = context.selection;
+	if (!testSelection(selection)) return;
+
+
+	alert("Бла-бла-бла", 'Создаем кликабельный прототип');
+
+
+	[doc showMessage: "Элемент создан"];
+}
+
+var Publish = function(context) {
+	var	doc = context.document;
+	alert("Публикуем прототип", 'UXperiment');
+  
+
+	[doc showMessage: "Прототип опубликован"];
+}
