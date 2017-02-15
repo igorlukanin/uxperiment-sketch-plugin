@@ -1,16 +1,3 @@
-@import 'util.js'
-
-function testSelection(selection) {
-	var result = false;
-	if ([selection count] == 0) {
-		alert('Выбери хоть что-нибудь!', 'UXperiment');
-		result = false;
-	} else {
-		result = true;
-	}
-	return result;
-}
-
 function dialogMake(artboardNames, curArtboard) {
 	var dialog = COSAlertWindow.new();
 
@@ -81,7 +68,10 @@ var Make = function(context) {
 	var	doc = context.document;
 	var selection = context.selection;
 
-	if (!testSelection(selection)) return;
+	if (selection.count() == 0) {
+		doc.showMessage('Выбери хоть что-нибудь!')
+		return
+	}
 
 	var command = context.command;
 	var page = context.document.currentPage();
