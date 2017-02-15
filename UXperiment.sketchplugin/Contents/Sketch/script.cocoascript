@@ -88,10 +88,47 @@ var Make = function(context) {
 	[doc showMessage: "Элемент создан"];
 }
 
-var Publish = function(context) {
-	var	doc = context.document;
-	alert("Публикуем прототип", 'UXperiment');
-  
+const exportLayer = layer => {
+	const name = layer.name
+	const index = layer.index
+	const type = layer.isArtboard ? 'artboard' :
+				 layer.isGroup    ? 'group' :
+				 layer.isImage    ? 'image' :
+				 layer.isPage     ? 'page' :
+				 layer.isShape    ? 'shape' :
+				 layer.isText     ? 'text' : undefined
 
-	[doc showMessage: "Прототип опубликован"];
+	log(name + ' at ' + index + ' is ' + type)
+
+	if (layer.iterate === undefined) return
+
+	layer.iterate(exportLayer)
+}
+
+var Publish = function(context) {
+	const sketch = context.api()
+	const document = sketch.selectedDocument
+	const pages = document.pages
+
+	pages.forEach(page => {
+		// Skip symbols
+		if (page.name == 'Symbols') return
+
+		log('Page: ' + page.name)
+
+		page.iterate(exportLayer)
+
+		/*layer => {*/
+			/*log(' Layer ' + layer.index + ': ' + layer.name)*/
+
+			/*layer.iterate(group => {*/
+				/*log('  Group ' + group.index + ': ' + group.name)*/
+				/*log('  isGroup -> ' + group.isGroup)*/
+
+			/*})*/
+		/*})*/
+	})
+
+	log(' ')
+	log(' ')
 }
