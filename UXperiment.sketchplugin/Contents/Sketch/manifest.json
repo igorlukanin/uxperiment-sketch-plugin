@@ -9,8 +9,7 @@
 		"identifier" : "make"
 	},
 	{
-		"script" : "script.js",
-		"handler" : "Publish",
+		"script" : "publish.js",
 		"shortcut" : "cmd alt p",
 		"name" : "Опубликовать прототип…",
 		"identifier" : "publish"
