@@ -2,14 +2,14 @@
 	"author" : "",
 	"commands" : [
 	{
-		"script" : "script.cocoascript",
+		"script" : "script.js",
 		"handler" : "Make",
 		"shortcut" : "cmd alt o",
 		"name" : "Создать активный элемент…",
 		"identifier" : "make"
 	},
 	{
-		"script" : "script.cocoascript",
+		"script" : "script.js",
 		"handler" : "Publish",
 		"shortcut" : "cmd alt p",
 		"name" : "Опубликовать прототип…",
