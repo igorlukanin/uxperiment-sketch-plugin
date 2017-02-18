@@ -1,4 +1,11 @@
 @import 'src/sketch.js';
+@import 'src/network.js';
+
+
+const uploadResult = result => {
+    const url = 'http://localhost:4015/sketch';
+    return sendPostRequest(url, result);
+};
 
 
 var onRun = context => {
@@ -9,5 +16,6 @@ var onRun = context => {
         .filter(page => page.name != 'Symbols')
         .map(describePage);
 
-    log(JSON.stringify(result, null, 2));
+    const response = uploadResult(result);
+    log(response);
 };
