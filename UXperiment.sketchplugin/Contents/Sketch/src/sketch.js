@@ -38,3 +38,8 @@ const describePage = page => ({
     name: page.name + '',
     layers: iterateAndMap(page, describeLayer)
 });
+
+const getPluginName = context => {
+    const components = context.scriptPath.pathComponents();
+    return components[components.length - 4];
+};

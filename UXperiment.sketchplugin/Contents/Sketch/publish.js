@@ -1,21 +1,33 @@
-@import 'src/sketch.js';
+@import 'src/api.js';
+@import 'src/config.js';
+@import 'src/i18n.js';
 @import 'src/network.js';
+@import 'src/sketch.js';
 
 
-const uploadResult = result => {
+const uploadDocument = (key, document) => {
+    const data = {
+        key,
+        document
+    };
+
     const url = 'http://localhost:4015/sketch';
-    return sendPostRequest(url, result);
+    return sendPostRequest(url, data);
 };
 
 
 var onRun = context => {
-	const sketch = context.api();
-    const pages = sketch.selectedDocument.pages;
+    if (!ensureApiKey(context)) {
+        return;
+    }
 
-	const result = pages
+    const sketch = context.api();
+    const document = sketch.selectedDocument;
+
+    const result = document.pages
         .filter(page => page.name != 'Symbols')
         .map(describePage);
 
-    const response = uploadResult(result);
+    const response = uploadDocument(getApiKey(context), result);
     log(response);
 };
