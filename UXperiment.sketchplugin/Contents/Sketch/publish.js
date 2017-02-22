@@ -21,10 +21,7 @@ var onRun = context => {
         return;
     }
 
-    const sketch = context.api();
-    const document = sketch.selectedDocument;
-
-    const result = document.pages
+    const result = context.api().selectedDocument.pages
         .filter(page => page.name != 'Symbols')
         .map(describePage);
 

@@ -1,6 +1,10 @@
 @import 'i18n.js';
 
 
+/**
+ * API key
+ */
+
 const hasApiKey = context => hasConfigValue(context, 'api.key');
 
 const getApiKey = context => getConfigValue(context, 'api.key');
@@ -14,12 +18,22 @@ const checkApiKeyIsValid = key => {
     return result.success;
 };
 
+
+/**
+ * Document id
+ */
+
 const getNewDocumentId = context => {
     const url = 'http://localhost:4015/ids';
     const result = sendPostRequest(url, { key: getApiKey(context) });
 
     return result.success ? result['id'] : undefined;
 };
+
+
+/**
+ * API readiness
+ */
 
 const ensureApiKey = context => {
     if (!hasApiKey(context) || !checkApiKeyIsValid(getApiKey(context))) {
@@ -38,3 +52,5 @@ const ensureApiKey = context => {
 
     return true;
 };
+
+const ensureApiReady = context => ensureApiKey(context) && ensureDocumentId(context);

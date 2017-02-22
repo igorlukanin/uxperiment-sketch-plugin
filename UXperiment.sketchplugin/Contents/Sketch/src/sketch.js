@@ -10,6 +10,11 @@ const iterateAndMap = (object, apply) => {
     return children;
 };
 
+
+/**
+ * Layer
+ */
+
 const getLayerType = layer => {
     return layer.isArtboard ? 'artboard' :
            layer.isGroup    ? 'group' :
@@ -34,10 +39,20 @@ const describeLayer = layer => ({
     children: iterateAndMap(layer, describeLayer)
 });
 
+
+/**
+ * Page
+ */
+
 const describePage = page => ({
     name: page.name + '',
     layers: iterateAndMap(page, describeLayer)
 });
+
+
+/**
+ * Document
+ */
 
 const hasDocumentId = context => hasDocumentValue(context, 'id');
 
@@ -59,6 +74,11 @@ const ensureDocumentId = context => {
 
     return true;
 };
+
+
+/**
+ * Plugin
+ */
 
 const getPluginName = context => {
     const components = context.scriptPath.pathComponents();
