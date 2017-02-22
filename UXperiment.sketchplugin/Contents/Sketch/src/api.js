@@ -14,6 +14,13 @@ const checkApiKeyIsValid = key => {
     return result.success;
 };
 
+const getNewDocumentId = context => {
+    const url = 'http://localhost:4015/ids';
+    const result = sendPostRequest(url, { key: getApiKey(context) });
+
+    return result.success ? result['id'] : undefined;
+};
+
 const ensureApiKey = context => {
     if (!hasApiKey(context) || !checkApiKeyIsValid(getApiKey(context))) {
         const sketch = context.api();

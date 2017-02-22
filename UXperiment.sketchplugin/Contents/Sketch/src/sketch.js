@@ -39,6 +39,27 @@ const describePage = page => ({
     layers: iterateAndMap(page, describeLayer)
 });
 
+const hasDocumentId = context => hasDocumentValue(context, 'id');
+
+const getDocumentId = context => getDocumentValue(context, 'id');
+
+const setDocumentId = (context, id) => setDocumentValue(context, 'id', id);
+
+const ensureDocumentId = context => {
+    if (!hasDocumentId(context)) {
+        const value = getNewDocumentId(context);
+
+        if (value != undefined) {
+            setDocumentId(context, value);
+            return true;
+        }
+
+        return false;
+    }
+
+    return true;
+};
+
 const getPluginName = context => {
     const components = context.scriptPath.pathComponents();
     return components[components.length - 4];

@@ -17,7 +17,7 @@ const uploadDocument = (key, document) => {
 
 
 var onRun = context => {
-    if (!ensureApiKey(context)) {
+    if (!ensureApiReady(context)) {
         return;
     }
 
