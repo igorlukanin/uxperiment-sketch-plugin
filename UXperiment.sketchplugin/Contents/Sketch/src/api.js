@@ -1,6 +1,3 @@
-@import 'i18n.js';
-
-
 /**
  * API key
  */
@@ -20,14 +17,30 @@ const checkApiKeyIsValid = key => {
 
 
 /**
- * Document id
+ * Document
  */
 
 const getNewDocumentId = context => {
+    const data = {
+        key: getApiKey(context)
+    };
+
     const url = 'http://localhost:4015/ids';
-    const result = sendPostRequest(url, { key: getApiKey(context) });
+    const result = sendPostRequest(url, data);
 
     return result.success ? result['id'] : undefined;
+};
+
+const uploadDocument = (context, document) => {
+    const data = {
+        key: getApiKey(context),
+        document
+    };
+
+    const url = 'http://localhost:4015/sketch';
+    const result = sendPostRequest(url, data);
+
+    return result;
 };
 
 

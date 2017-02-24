@@ -49,6 +49,10 @@ const describePage = page => ({
     layers: iterateAndMap(page, describeLayer)
 });
 
+const describePages = pages => pages
+    .filter(page => page.name != 'Symbols')
+    .map(describePage);
+
 
 /**
  * Document
@@ -74,6 +78,11 @@ const ensureDocumentId = context => {
 
     return true;
 };
+
+const describeDocument = context => ({
+    'id': getDocumentId(context),
+    pages: describePages(context.api().selectedDocument.pages)
+});
 
 
 /**

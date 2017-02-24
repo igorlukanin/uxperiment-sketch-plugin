@@ -1,6 +1,3 @@
-@import 'sketch.js'
-
-
 const getFullConfigKey = (context, key) => {
     return getPluginName(context) + '.' + key;
 };
@@ -31,9 +28,11 @@ const getDocumentValue = (context, key) => {
     const store = context.command;
     const fullKey = getFullConfigKey(context, key);
 
-    return context.api().selectedDocument.pages
+    const value = context.api().selectedDocument.pages
         .map(page => store.valueForKey_onLayer_(fullKey, page.sketchObject))
         .reduce((value, current) => value !== undefined || current === null ? value : current, undefined);
+
+    return value !== undefined ? value + '' : undefined;
 };
 
 const hasDocumentValue = (context, key) => getDocumentValue(context, key) !== undefined;
