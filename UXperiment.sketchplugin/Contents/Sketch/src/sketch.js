@@ -93,3 +93,12 @@ const getPluginName = context => {
     const components = context.scriptPath.pathComponents();
     return components[components.length - 4];
 };
+
+
+/**
+ * Interaction
+ */
+
+const showToast = (context, text) => context.api().message(text);
+
+const showPrompt = (context, text, value) => context.api().getStringFromUser(text, value);

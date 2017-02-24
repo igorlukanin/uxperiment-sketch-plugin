@@ -12,5 +12,6 @@ var onRun = context => {
 
     const document = describeDocument(context);
     const response = uploadDocument(context, document);
-    log(response);
+
+    showToast(context, response.success ? _('publish.success') : _('publish.failure'));
 };
