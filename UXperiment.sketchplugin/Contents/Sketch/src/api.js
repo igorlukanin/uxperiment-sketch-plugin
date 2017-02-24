@@ -50,7 +50,7 @@ const uploadDocument = (context, document) => {
 
 const ensureApiKey = context => {
     if (!hasApiKey(context) || !checkApiKeyIsValid(getApiKey(context))) {
-        const key = showPrompt(_('api.key_request'), getApiKey(context));
+        const key = showPrompt(context, _('api.key_request'), getApiKey(context));
 
         if (key !== null && checkApiKeyIsValid(key)) {
             setApiKey(context, key);
