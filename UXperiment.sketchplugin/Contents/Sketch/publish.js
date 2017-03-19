@@ -1,5 +1,6 @@
 @import 'src/api.js';
 @import 'src/config.js';
+@import 'src/fs.js';
 @import 'src/i18n.js';
 @import 'src/network.js';
 @import 'src/sketch.js';

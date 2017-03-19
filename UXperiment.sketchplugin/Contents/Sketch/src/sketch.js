@@ -1,12 +1,12 @@
 const roundSize = size => Math.round(size * 10) / 10;
 
-const iterateAndMap = (object, apply) => {
+const iterateAndMap = (object, apply, argument) => {
     if (object.iterate === undefined) {
         return undefined;
     }
 
     const children = [];
-    object.iterate(child => children.push(apply(child)));
+    object.iterate(child => children.push(apply(child, argument)));
     return children;
 };
 
@@ -31,27 +31,48 @@ const getLayerFrame = layer => ({
     height: roundSize(layer.frame.height)
 });
 
-const describeLayer = layer => ({
-    name: layer.name + '',
-    index: layer.index,
-    type: getLayerType(layer),
-    frame: getLayerFrame(layer),
-    children: iterateAndMap(layer, describeLayer)
-});
+const getLayerImageData = (layer, document) => {
+    const path = getTemporaryFilePath('export.png');
+
+    const slice = MSExportRequest
+        .exportRequestsFromExportableLayer(layer.sketchObject)
+        .firstObject();
+    slice.setScale(1);
+
+    document.sketchObject.saveArtboardOrSlice_toFile(slice, path);
+
+    return 'data:image/png;base64,' + readFileAsBase64(path);
+};
+
+const describeLayer = (layer, document) => {
+    const description = {
+        name: layer.name + '',
+        index: layer.index,
+        type: getLayerType(layer),
+        frame: getLayerFrame(layer),
+        children: iterateAndMap(layer, describeLayer, document)
+    };
+
+    if (description.type === 'image') {
+        description.image = getLayerImageData(layer, document);
+    }
+
+    return description;
+};
 
 
 /**
  * Page
  */
 
-const describePage = page => ({
+const describePage = (page, document) => ({
     name: page.name + '',
-    layers: iterateAndMap(page, describeLayer)
+    layers: iterateAndMap(page, describeLayer, document)
 });
 
-const describePages = pages => pages
+const describePages = document => document.pages
     .filter(page => page.name != 'Symbols')
-    .map(describePage);
+    .map(page => describePage(page, document));
 
 
 /**
@@ -81,7 +102,7 @@ const ensureDocumentId = context => {
 
 const describeDocument = context => ({
     'id': getDocumentId(context),
-    pages: describePages(context.api().selectedDocument.pages)
+    pages: describePages(context.api().selectedDocument)
 });
 
 
