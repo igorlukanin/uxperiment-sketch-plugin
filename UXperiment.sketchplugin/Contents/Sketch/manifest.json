@@ -2,23 +2,22 @@
 	"author" : "",
 	"commands" : [
 	{
-		"script" : "script.js",
-		"handler" : "Make",
+		"script" : "add-transition.js",
 		"shortcut" : "cmd alt o",
-		"name" : "Создать активный элемент…",
-		"identifier" : "make"
+		"name" : "Add transition…",
+		"identifier" : "add-transition"
 	},
 	{
 		"script" : "publish.js",
 		"shortcut" : "cmd alt p",
-		"name" : "Опубликовать прототип…",
+		"name" : "Publish…",
 		"identifier" : "publish"
 	}
 
 	],
 	"menu" : {
 		"items" : [
-			"make",
+			"add-transition",
 			"publish"
 		],
 		"title" : "UXperiment"

@@ -1,12 +1,12 @@
 const roundSize = size => Math.round(size * 10) / 10;
 
-const iterateAndMap = (object, apply, argument) => {
+const iterateAndMap = (object, apply, argument1, argument2) => {
     if (object.iterate === undefined) {
         return undefined;
     }
 
     const children = [];
-    object.iterate(child => children.push(apply(child, argument)));
+    object.iterate(child => children.push(apply(child, argument1, argument2)));
     return children;
 };
 
@@ -44,16 +44,22 @@ const getLayerImageData = (layer, document) => {
     return 'data:image/png;base64,' + readFileAsBase64(path);
 };
 
-const describeLayer = (layer, document) => {
+const describeLayer = (layer, document, context) => {
+    const type = getLayerType(layer);
+
     const description = {
         name: layer.name + '',
         index: layer.index,
-        type: getLayerType(layer),
+        type,
         frame: getLayerFrame(layer),
-        children: iterateAndMap(layer, describeLayer, document)
+        children: iterateAndMap(layer, describeLayer, document, context),
     };
 
-    if (description.type === 'image') {
+    if (hasLayerValue(context, layer.sketchObject, 'transition')) {
+        description.transition = parseInt(getLayerValue(context, layer.sketchObject, 'transition'));
+    }
+
+    if (type === 'image' || type === 'shape' || type === 'text') {
         description.image = getLayerImageData(layer, document);
     }
 
@@ -65,14 +71,36 @@ const describeLayer = (layer, document) => {
  * Page
  */
 
-const describePage = (page, document) => ({
+const describePage = (page, document, context) => ({
     name: page.name + '',
-    layers: iterateAndMap(page, describeLayer, document)
+    layers: iterateAndMap(page, describeLayer, document, context)
 });
 
-const describePages = document => document.pages
+const describePages = (document, context) => document.pages
     .filter(page => page.name != 'Symbols')
-    .map(page => describePage(page, document));
+    .map(page => describePage(page, document, context));
+
+const getArtboards = page => iterateAndMap(page, layer => layer);
+
+const getArtboardNames = page => getArtboards(page).map(artboard => artboard.name);
+
+
+/**
+ * Selection
+ */
+const isSelectionEmpty = context => context.selection.count() === 0;
+
+const getSelectedLayer = context => context.selection[0];
+
+const getSelectedArtboard = context => {
+    let layer = getSelectedLayer(context);
+
+    while (layer && !layer.isMemberOfClass(MSArtboardGroup.class())) {
+        layer = layer.parentGroup();
+    }
+
+    return layer;
+};
 
 
 /**
@@ -102,7 +130,7 @@ const ensureDocumentId = context => {
 
 const describeDocument = context => ({
     'id': getDocumentId(context),
-    pages: describePages(context.api().selectedDocument)
+    pages: describePages(context.api().selectedDocument, context)
 });
 
 

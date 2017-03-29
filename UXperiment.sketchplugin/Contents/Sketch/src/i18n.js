@@ -7,6 +7,16 @@ const l18nStrings = {
     publish: {
         success: 'Document exported to UXperiment',
         failure: 'Failed to export the document to UXperiment'
+    },
+    'add-transition': {
+        'empty-selection': 'Select an element to create a transition',
+        dialog: {
+            title: 'New transition',
+            subtitle: 'Choose an artboard to be activated on click',
+            'create-button': 'Create',
+            'cancel-button': 'Cancel'
+        },
+        success: 'Transition created'
     }
 };
 

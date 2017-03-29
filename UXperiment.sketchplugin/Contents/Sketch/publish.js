@@ -4,6 +4,7 @@
 @import 'src/i18n.js';
 @import 'src/network.js';
 @import 'src/sketch.js';
+@import 'src/transition.js';
 
 
 var onRun = context => {
