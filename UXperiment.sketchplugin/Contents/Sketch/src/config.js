@@ -29,7 +29,7 @@ const getLayerValue = (context, layer, key) => {
     const fullKey = getFullConfigKey(context, key);
     const value = store.valueForKey_onLayer_(fullKey, layer);
 
-    return value !== undefined ? value + '' : undefined;
+    return value !== undefined && value !== null ? value + '' : undefined;
 };
 
 const hasLayerValue = (context, layer, key) => getLayerValue(context, layer, key) !== undefined;
@@ -50,7 +50,7 @@ const getDocumentValue = (context, key) => {
         .map(page => getLayerValue(context, page.sketchObject, key))
         .reduce((value, current) => value !== undefined || current === null ? value : current, undefined);
 
-    return value !== undefined ? value + '' : undefined;
+    return value !== undefined && value !== null ? value + '' : undefined;
 };
 
 const hasDocumentValue = (context, key) => getDocumentValue(context, key) !== undefined;
