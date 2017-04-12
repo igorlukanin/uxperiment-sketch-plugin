@@ -7,7 +7,7 @@ const iterateAndMap = (object, apply, argument1, argument2) => {
 
     const children = [];
     object.iterate(child => children.push(apply(child, argument1, argument2)));
-    return children;
+    return children.filter(child => child !== undefined);
 };
 
 
@@ -44,26 +44,34 @@ const getLayerImageData = (layer, document) => {
     return 'data:image/png;base64,' + readFileAsBase64(path);
 };
 
+const isMeaningfulLayerDescription = description =>
+    description.image !== undefined ||
+    description.transition !== undefined ||
+    description.children !== undefined;
+
 const describeLayer = (layer, document, context) => {
     const type = getLayerType(layer);
 
+    if (type === undefined) {
+        return undefined;
+    }
+
     const description = {
         name: layer.name + '',
-        index: layer.index,
         type,
         frame: getLayerFrame(layer),
-        children: iterateAndMap(layer, describeLayer, document, context),
+        children: iterateAndMap(layer, describeLayer, document, context)
     };
 
     if (hasLayerValue(context, layer.sketchObject, 'transition')) {
         description.transition = parseInt(getLayerValue(context, layer.sketchObject, 'transition'));
     }
 
-    if (type === 'image' || type === 'shape' || type === 'text') {
+    if (type === 'artboard') {
         description.image = getLayerImageData(layer, document);
     }
 
-    return description;
+    return isMeaningfulLayerDescription(description) ? description : undefined;
 };
 
 

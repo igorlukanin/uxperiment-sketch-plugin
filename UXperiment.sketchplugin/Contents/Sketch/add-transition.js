@@ -72,7 +72,7 @@ var onRun = context => {
 
 	const page = context.api().selectedDocument.selectedPage;
 	const selectedArtboard = getSelectedArtboard(context);
-	const artboards = getArtboardNames(page).sort().reverse();
+	const artboards = getArtboardNames(page);
 
 	const { dialog, buttons } = createAddTransitionDialog(artboards, artboards.indexOf(selectedArtboard.name()));
 	const response = dialog.runModal();
