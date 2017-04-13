@@ -82,7 +82,7 @@ var onRun = context => {
 	}
 
 	const artboardIndex = getSelectedValueOfAddTransitionDialog(buttons, artboards);
-	saveTransition(context, getSelectedLayer(context), artboardIndex);
+	setTransitionToArtboard(context, getSelectedLayer(context), artboardIndex);
 
 	showToast(context, _('add-transition.success'));
 };

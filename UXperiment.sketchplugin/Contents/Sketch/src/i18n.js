@@ -11,8 +11,9 @@ const l18nStrings = {
     },
     'add-transition': {
         'empty-selection': 'Select an element to create a transition',
+        url_request: 'Enter a URL to be activated on click',
         dialog: {
-            title: 'New transition',
+            title: 'New transition to artboard',
             subtitle: 'Choose an artboard to be activated on click',
             'create-button': 'Create',
             'cancel-button': 'Cancel'

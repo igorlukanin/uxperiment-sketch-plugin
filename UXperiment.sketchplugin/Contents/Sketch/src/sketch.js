@@ -63,8 +63,8 @@ const describeLayer = (layer, document, context) => {
         children: iterateAndMap(layer, describeLayer, document, context)
     };
 
-    if (hasLayerValue(context, layer.sketchObject, 'transition')) {
-        description.transition = parseInt(getLayerValue(context, layer.sketchObject, 'transition'));
+    if (hasTransition(context, layer.sketchObject)) {
+        description.transition = getTransition(context, layer.sketchObject);
     }
 
     if (type === 'artboard') {
