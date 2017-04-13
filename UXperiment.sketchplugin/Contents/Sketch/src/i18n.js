@@ -5,6 +5,7 @@ const l18nStrings = {
         no_key_present: 'There\'s no API key for UXperiment'
     },
     publish: {
+        'not-saved': 'Save the document before exporting it',
         success: 'Document exported to UXperiment',
         failure: 'Failed to export the document to UXperiment'
     },

@@ -13,6 +13,12 @@ var onRun = context => {
     }
 
     const document = describeDocument(context);
+
+    if (document === undefined) {
+        showToast(context, _('publish.not-saved'));
+        return;
+    }
+
     const response = uploadDocument(context, document);
 
     showToast(context, response.success ? _('publish.success') : _('publish.failure'));

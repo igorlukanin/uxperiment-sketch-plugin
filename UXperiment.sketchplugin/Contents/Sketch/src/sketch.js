@@ -136,10 +136,28 @@ const ensureDocumentId = context => {
     return true;
 };
 
-const describeDocument = context => ({
-    'id': getDocumentId(context),
-    pages: describePages(context.api().selectedDocument, context)
-});
+const getDocumentName = url => {
+    if (url === null) {
+        return undefined;
+    }
+
+    const parts = (url + '').split('/');
+    return parts[parts.length - 1].replace(/\.sketch$/, '');
+}
+
+const describeDocument = context => {
+    const name = getDocumentName(context.document.fileURL());
+
+    if (name === undefined) {
+        return undefined;
+    }
+
+    return {
+        'id': getDocumentId(context),
+        name,
+        pages: describePages(context.api().selectedDocument, context)
+    };
+};
 
 
 /**
