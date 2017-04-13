@@ -1,30 +1,26 @@
 {
-	"author" : "",
-	"commands" : [
-	{
+	"identifier": "io.uxperiment.sketch-plugin",
+	"version": "0.0.3",
+	"name": "UXperiment Sketch Export",
+	"description": "Convert Sketch documents to analytics-enabled prototypes",
+	"author": "UXperiment",
+	"authorEmail": "mail@igor.lukanin.name",
+	"commands" : [ {
 		"script" : "add-transition.js",
 		"shortcut" : "cmd alt o",
 		"name" : "Add transition…",
 		"identifier" : "add-transition"
-	},
-	{
+	}, {
 		"script" : "publish.js",
 		"shortcut" : "cmd alt p",
 		"name" : "Publish…",
 		"identifier" : "publish"
-	}
-
-	],
+	} ],
 	"menu" : {
 		"items" : [
 			"add-transition",
 			"publish"
 		],
 		"title" : "UXperiment"
-	},
-	"identifier" : "com.example.sketch.fca9e85c-c84b-4de8-8dd3-aa9af1afe307",
-	"version" : "0.0.2",
-	"description" : "",
-	"authorEmail" : "",
-	"name" : "UXperiment"
+	}
 }
