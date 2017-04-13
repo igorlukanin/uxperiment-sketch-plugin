@@ -2,7 +2,7 @@
  * API key
  */
 
-const apiHost = 'http://api.uxperiment.io';
+const apiHost = 'https://api.uxperiment.io';
 
 const hasApiKey = context => hasConfigValue(context, 'api.key');
 
