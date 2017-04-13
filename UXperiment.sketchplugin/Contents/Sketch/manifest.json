@@ -1,6 +1,6 @@
 {
 	"identifier": "io.uxperiment.sketch-plugin",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"name": "UXperiment Sketch Export",
 	"description": "Convert Sketch documents to analytics-enabled prototypes",
 	"author": "UXperiment",

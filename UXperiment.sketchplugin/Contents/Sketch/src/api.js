@@ -2,6 +2,8 @@
  * API key
  */
 
+const apiHost = 'http://api.uxperiment.io';
+
 const hasApiKey = context => hasConfigValue(context, 'api.key');
 
 const getApiKey = context => getConfigValue(context, 'api.key');
@@ -9,7 +11,7 @@ const getApiKey = context => getConfigValue(context, 'api.key');
 const setApiKey = (context, key) => setConfigValue(context, 'api.key', key);
 
 const checkApiKeyIsValid = key => {
-    const url = 'http://localhost:4015/keys/' + key;
+    const url = apiHost + '/keys/' + key;
     const result = sendGetRequest(url);
 
     return result.success;
@@ -25,7 +27,7 @@ const getNewDocumentId = context => {
         key: getApiKey(context)
     };
 
-    const url = 'http://localhost:4015/ids';
+    const url = apiHost + '/ids';
     const result = sendPostRequest(url, data);
 
     return result.success ? result['id'] : undefined;
@@ -37,7 +39,7 @@ const uploadDocument = (context, document) => {
         document
     };
 
-    const url = 'http://localhost:4015/sketch';
+    const url = apiHost + '/sketch';
     const result = sendPostRequest(url, data);
 
     return result;
