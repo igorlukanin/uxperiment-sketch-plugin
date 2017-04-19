@@ -2,7 +2,11 @@
  * API key
  */
 
-const apiHost = 'https://api.uxperiment.io';
+const useLocalApi = false;
+
+const apiHost = useLocalApi
+    ? 'http://localhost:4015'
+    : 'https://api.uxperiment.io';
 
 const hasApiKey = context => hasConfigValue(context, 'api.key');
 
