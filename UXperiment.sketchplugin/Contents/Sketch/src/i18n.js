@@ -19,6 +19,15 @@ const l18nStrings = {
             'cancel-button': 'Cancel'
         },
         success: 'Transition created'
+    },
+    'select-initial-artboard': {
+        dialog: {
+            title: 'Initial artboard',
+            subtitle: 'Choose an artboard from which a user starts',
+            'select-button': 'Select',
+            'cancel-button': 'Cancel'
+        },
+        success: 'Initial artboard selected'
     }
 };
 

@@ -24,3 +24,20 @@ const setTransitionToUrl = (context, fromLayer, toUrl) => {
         value: toUrl + ''
     }));
 };
+
+
+const hasInitialArtboard = context => hasDocumentValue(context, 'initial-artboard');
+
+const isInitialArtboard = (context, artboard) => {
+    try {
+        return JSON.parse(getLayerValue(context, artboard, 'initial-artboard'));
+    }
+    catch (err) {
+        return false;
+    }
+};
+
+const selectInitialArtboard = (context, artboard, flag = true) => {
+    setDocumentValue(context, 'initial-artboard', true);
+    setLayerValue(context, artboard, 'initial-artboard', flag);
+};

@@ -1,6 +1,6 @@
 {
 	"identifier": "io.uxperiment.sketch-plugin",
-	"version": "0.0.6",
+	"version": "0.0.7",
 	"name": "UXperiment Sketch Export",
 	"description": "Convert Sketch documents to analytics-enabled prototypes",
 	"author": "UXperiment",
@@ -15,15 +15,20 @@
 		"name": "Add transition to URL…",
 		"identifier": "add-transition-to-url"
 	}, {
+		"script": "select-initial-artboard.js",
+		"name": "Select initial artboard…",
+		"identifier": "select-initial-artboard"
+	}, {
 		"script": "publish.js",
 		"shortcut": "cmd alt p",
-		"name": "Publish…",
+		"name": "Publish",
 		"identifier": "publish"
 	} ],
 	"menu" : {
 		"items": [
 			"add-transition-to-artboard",
 			"add-transition-to-url",
+			"select-initial-artboard",
 			"publish"
 		],
 		"title": "UXperiment"

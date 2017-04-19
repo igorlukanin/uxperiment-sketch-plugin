@@ -5,11 +5,22 @@
 @import 'src/network.js';
 @import 'src/sketch.js';
 @import 'src/transition.js';
+@import 'src/ui.js';
+
+@import 'select-initial-artboard.js';
 
 
 var onRun = context => {
     if (!ensureApiReady(context)) {
         return;
+    }
+
+    if (!hasInitialArtboard(context)) {
+        trySelectInitialArtboard(context);
+
+        if (!hasInitialArtboard(context)) {
+            return;
+        }
     }
 
     const document = describeDocument(context);

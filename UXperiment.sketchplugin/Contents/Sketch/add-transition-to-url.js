@@ -5,6 +5,7 @@
 @import 'src/network.js';
 @import 'src/sketch.js';
 @import 'src/transition.js';
+@import 'src/ui.js';
 
 
 var onRun = context => {

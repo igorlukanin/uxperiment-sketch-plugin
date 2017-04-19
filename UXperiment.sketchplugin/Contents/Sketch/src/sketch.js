@@ -67,6 +67,9 @@ const describeLayer = (layer, document, context) => {
         description.transition = getTransition(context, layer.sketchObject);
     }
 
+    description.initialArtboard = type === 'artboard'
+        && isInitialArtboard(context, layer.sketchObject);
+
     if (type === 'artboard') {
         description.image = getLayerImageData(layer, document);
     }
@@ -98,7 +101,9 @@ const getArtboardNames = page => getArtboards(page).map(artboard => artboard.nam
  */
 const isSelectionEmpty = context => context.selection.count() === 0;
 
-const getSelectedLayer = context => context.selection[0];
+const getSelectedLayer = context => context.selection.length > 0
+    ? context.selection[0]
+    : undefined;
 
 const getSelectedArtboard = context => {
     let layer = getSelectedLayer(context);
